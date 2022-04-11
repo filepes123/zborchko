@@ -1,4 +1,4 @@
 [build]
-  command = "CI=false npm run build && cd functions/node-fetch && npm"
+  command = "npm run build && cd functions/node-fetch && npm"
   functions = "functions"
   publish = "build"
