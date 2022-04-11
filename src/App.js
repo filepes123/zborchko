@@ -13,15 +13,9 @@ export default function App() {
   const [data, setData] = useState("");
   useEffect(() => {
     async function fetchData() {
-      let config = {
-        headers: {
-          Authorization: "Bearer " + process.env.REACT_TWITTER_KEY
-        }
-      };
-      const data = await axios.get('/.netlify/functions/node-fetch', config);
-      
-      if (data.data) {
-        parseData(data.data);
+      const data = await axios.get('/.netlify/functions/node-fetch');
+      if (data.data.data) {
+        parseData(data.data.data);
       }
     }
     fetchData();
@@ -29,7 +23,6 @@ export default function App() {
 
   const parseData = (data) => {
     const regValidation = /[!@#$%^&*()_+\-=[\]{};~':"\\|,.<>/?]/g;
-    console.log(data);
     const randomTweetIndex = Math.floor(
       Math.random() * parseInt(data.data.length)
     );
@@ -43,7 +36,7 @@ export default function App() {
       Math.random() * parseInt(randomTweet.length)
     );
     const randomWord = randomTweet[randomWordIndex].toUpperCase();
-    console.log(randomWord);
+    console.log('ne kur gledaj tuka go stavam ova za da znam barem koj e zborot ',randomWord)
     setData(randomWord);
   };
   const setFinish = () => {
@@ -71,7 +64,6 @@ export default function App() {
     for (var i = 0; i < 5; i += 1) {
       final.push(
         <div className="flex items-center mt-4" key={i}>
-          {console.log(data)}
           <Tile
             word={data && data !== "" ? data : "LJUBOMIR"}
             index={i}
