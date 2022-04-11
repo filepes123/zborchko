@@ -29,6 +29,7 @@ export default function App() {
 
   const parseData = (data) => {
     const regValidation = /[!@#$%^&*()_+\-=[\]{};~':"\\|,.<>/?]/g;
+    console.log(data);
     const randomTweetIndex = Math.floor(
       Math.random() * parseInt(data.data.length)
     );
