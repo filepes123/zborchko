@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../styles.css";
 import "../styles/tailwind-pre-build.css";
 
-const Tile = ({ word, setFinish }) => {
+const Tile = ({ word, setFinish, setUpdateIndex, disabled }) => {
   const [parsedWord, setParsedWord] = useState([]);
   const [guess, setGuess] = useState({});
   const [counter, setCounter] = useState(0);
@@ -58,6 +58,7 @@ const Tile = ({ word, setFinish }) => {
       }
     }
     setParsedWord(finishedRow);
+    setUpdateIndex()
     return finishedRow;
   };
 
@@ -70,6 +71,7 @@ const Tile = ({ word, setFinish }) => {
           maxLength="1"
           disabled={data.letter}
           key={index}
+          disabled={disabled}
           className={`m-0.5 mr-5 text-white text-transfor: uppercase flex items-center justify-center w-12 h-12 text-xl rounded-sm border-2 border-gray-900 ${data.class} text-center`}
         />
       ))}

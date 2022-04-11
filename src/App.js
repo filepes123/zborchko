@@ -11,6 +11,7 @@ export default function App() {
   const [done, setDone] = useState(false);
   const { width, height } = useWindowSize();
   const [data, setData] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
   useEffect(() => {
     async function fetchData() {
       const data = await axios.get('/.netlify/functions/node-fetch');
@@ -39,6 +40,9 @@ export default function App() {
     console.log('ne kur gledaj tuka go stavam ova za da znam barem koj e zborot ',randomWord)
     setData(randomWord);
   };
+  const setUpdateIndex = () => {
+    setCurrentIndex(currentIndex + 1);
+  }
   const setFinish = () => {
     setDone(true);
     swal({
@@ -68,6 +72,8 @@ export default function App() {
             word={data && data !== "" ? data : "LJUBOMIR"}
             index={i}
             setFinish={setFinish}
+            disabled={currentIndex !== i}
+            setUpdateIndex={setUpdateIndex}
           />
         </div>
       );
