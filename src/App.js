@@ -18,7 +18,7 @@ export default function App() {
           Authorization: "Bearer " + process.env.REACT_TWITTER_KEY
         }
       };
-      // const data = await axios.get('https://api.twitter.com/2/users/1648317175/tweets', config);
+      const data = await axios.get('https://api.twitter.com/2/users/1648317175/tweets', config);
       if (data) {
         parseData(data);
       }
