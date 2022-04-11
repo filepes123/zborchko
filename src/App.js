@@ -22,6 +22,12 @@ export default function App() {
     fetchData();
   }, []);
 
+  useEffect(()=>{
+    if(currentIndex > 4){
+      setFinish()
+    }
+  },[currentIndex])
+
   const parseData = (data) => {
     const regValidation = /[!@#$%^&*()_+\-=[\]{};~':"\\|,.<>/?]/g;
     const randomTweetIndex = Math.floor(
@@ -46,7 +52,7 @@ export default function App() {
   const setFinish = () => {
     setDone(true);
     swal({
-      title: "Sakash pak?",
+      title: `Sakash pak? posho zborot beshe ${data}`,
       text: "Btw poteshko kje e ovoj put",
       icon:
         "https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg",
