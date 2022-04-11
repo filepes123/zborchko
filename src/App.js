@@ -19,9 +19,9 @@ export default function App() {
         }
       };
       const data = await axios.get('/.netlify/functions/node-fetch', config);
-      console.log(data)
-      if (data) {
-        parseData(data);
+      
+      if (data.data) {
+        parseData(data.data);
       }
     }
     fetchData();
