@@ -26,7 +26,10 @@ const Tile = ({ word, setFinish, setUpdateIndex, disabled }) => {
     setParsedWord(final);
   };
 
-  const updateGuess = (letter, index) => {
+  const updateGuess = (event, index) => {
+    const letter = event.target.value;
+    const { name } = event.target;
+    const inputIndex = name;
     if (letter !== "") {
       const append = guess;
       append[index] = letter.toUpperCase();
@@ -36,6 +39,14 @@ const Tile = ({ word, setFinish, setUpdateIndex, disabled }) => {
       const append = guess;
       delete guess[index];
       setGuess({ ...append });
+    }
+    if (inputIndex < word.length) {  
+      const nextfield = document.querySelector(
+        `input[name="${(parseInt(inputIndex) + 1).toString()}"]`
+      );
+      if (nextfield !== null) {
+        nextfield.focus();
+      }
     }
   };
 
@@ -58,22 +69,22 @@ const Tile = ({ word, setFinish, setUpdateIndex, disabled }) => {
       }
     }
     setParsedWord(finishedRow);
-    setUpdateIndex()
+    setUpdateIndex();
     return finishedRow;
   };
-
   return (
     <>
       {parsedWord.map((data, index) => (
-        <input
-          type="text"
-          onChange={(e) => updateGuess(e.target.value, index)}
-          maxLength="1"
-          disabled={data.letter}
-          key={index}
-          disabled={disabled}
-          className={`m-0.5 mr-5 text-white text-transfor: uppercase flex items-center justify-center w-12 h-12 text-xl rounded-sm border-2 border-gray-900 ${data.class} text-center`}
-        />
+          <input
+            type="text"
+            onChange={(e) => updateGuess(e, index)}
+            maxLength="1"
+            disabled={data.letter}
+            key={index}
+            disabled={disabled}
+            name={index}
+            className={`m-0.5 mr-5 text-white text-transfor: uppercase flex items-center justify-center w-12 h-12 text-xl rounded-sm border-2 border-gray-900 ${data.class} text-center`}
+          />
       ))}
     </>
   );
