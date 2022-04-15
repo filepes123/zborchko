@@ -80,6 +80,7 @@ export default function App() {
             setFinish={setFinish}
             disabled={currentIndex !== i}
             setUpdateIndex={setUpdateIndex}
+            row={i}
           />
         </div>
       );

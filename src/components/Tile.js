@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import "../styles.css";
 import "../styles/tailwind-pre-build.css";
 
-const Tile = ({ word, setFinish, setUpdateIndex, disabled }) => {
+const Tile = ({ word, setFinish, setUpdateIndex, disabled, row }) => {
   const [parsedWord, setParsedWord] = useState([]);
   const [guess, setGuess] = useState({});
   const [counter, setCounter] = useState(0);
+  const [inputIndex, setInputIndex] = useState(0);
   useEffect(() => {
     tiles();
   }, [word]);
@@ -14,7 +15,8 @@ const Tile = ({ word, setFinish, setUpdateIndex, disabled }) => {
     if (counter === word.length) {
       validateTiles();
     }
-  }, [guess]);
+    autoFocusTiles();
+  }, [guess, inputIndex, row]);
 
   const tiles = () => {
     const final = [];
@@ -29,7 +31,7 @@ const Tile = ({ word, setFinish, setUpdateIndex, disabled }) => {
   const updateGuess = (event, index) => {
     const letter = event.target.value;
     const { name } = event.target;
-    const inputIndex = name;
+    setInputIndex(name[0]);
     if (letter !== "") {
       const append = guess;
       append[index] = letter.toUpperCase();
@@ -40,16 +42,20 @@ const Tile = ({ word, setFinish, setUpdateIndex, disabled }) => {
       delete guess[index];
       setGuess({ ...append });
     }
-    if (inputIndex < word.length) {  
-      const nextfield = document.querySelector(
-        `input[name="${(parseInt(inputIndex) + 1).toString()}"]`
-      );
+  };
+  const autoFocusTiles = () => {
+    if (inputIndex < word.length) {
+      const selector = `${(
+        parseInt(inputIndex) + 1
+      ).toString()}-${row.toString()}`;
+      const nextfield = document.querySelector(`input[name="${selector}"]`);
       if (nextfield !== null) {
         nextfield.focus();
       }
+    } else {
+      setInputIndex(0);
     }
   };
-
   const validateTiles = () => {
     const parsedGuess = Object.entries(guess).map(([k, v]) => v);
     const finishedRow = [];
@@ -75,16 +81,16 @@ const Tile = ({ word, setFinish, setUpdateIndex, disabled }) => {
   return (
     <>
       {parsedWord.map((data, index) => (
-          <input
-            type="text"
-            onChange={(e) => updateGuess(e, index)}
-            maxLength="1"
-            disabled={data.letter}
-            key={index}
-            disabled={disabled}
-            name={index}
-            className={`m-0.5 mr-5 text-white text-transfor: uppercase flex items-center justify-center w-12 h-12 text-xl rounded-sm border-2 border-gray-900 ${data.class} text-center`}
-          />
+        <input
+          type="text"
+          onChange={(e) => updateGuess(e, index)}
+          maxLength="1"
+          disabled={data.letter}
+          key={index}
+          disabled={disabled}
+          name={index + "-" + row.toString()}
+          className={`m-0.5 mr-5 text-white text-transfor: uppercase flex items-center justify-center w-12 h-12 text-xl rounded-sm border-2 border-gray-900 ${data.class} text-center`}
+        />
       ))}
     </>
   );
