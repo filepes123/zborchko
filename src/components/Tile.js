@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../styles.css";
 import "../styles/tailwind-pre-build.css";
-import soundfile from "../../public/buzzerche.wav";
+import soundfile from "../sound-effects/buzzerche.wav";
 
 const Tile = ({ word, setFinish, setUpdateIndex, disabled, row }) => {
   const [parsedWord, setParsedWord] = useState([]);
