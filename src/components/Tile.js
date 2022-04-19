@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../styles.css";
 import "../styles/tailwind-pre-build.css";
+import soundfile from "../../public/buzzerche.wav";
 
 const Tile = ({ word, setFinish, setUpdateIndex, disabled, row }) => {
   const [parsedWord, setParsedWord] = useState([]);
@@ -20,7 +21,7 @@ const Tile = ({ word, setFinish, setUpdateIndex, disabled, row }) => {
 
   const tiles = () => {
     const final = [];
-    const tmpObj = { letter: "", class: "bg-yellow-800" };
+    const tmpObj = { letter: "", class: "bg-teal-400" };
     for (let i = 0; i < word.length; i += 1) {
       final.push(tmpObj);
     }
@@ -62,14 +63,16 @@ const Tile = ({ word, setFinish, setUpdateIndex, disabled, row }) => {
     if (parsedGuess.join("") === word) {
       setFinish();
     } else {
+      var audio = new Audio(soundfile)
+      audio.play()
       for (var i = 0; i < word.length; i += 1) {
         const tmpObj = {};
         if (parsedGuess[i] === word[i]) {
           tmpObj.letter = parsedGuess[i];
-          tmpObj.class = "bg-green-500";
+          tmpObj.class = "bg-green-400";
         } else {
           tmpObj.letter = parsedGuess[i];
-          tmpObj.class = "bg-red-500";
+          tmpObj.class = "bg-red-400";
         }
         finishedRow.push(tmpObj);
       }
@@ -89,7 +92,7 @@ const Tile = ({ word, setFinish, setUpdateIndex, disabled, row }) => {
           key={index}
           disabled={disabled}
           name={index + "-" + row.toString()}
-          className={`m-0.5 mr-5 text-white text-transfor: uppercase flex items-center justify-center w-12 h-12 text-xl rounded-sm border-2 border-gray-900 ${data.class} text-center`}
+          className={`m-0.5 mr-5 rounded-lg text-white text-transfor: uppercase flex items-center justify-center w-12 h-12 text-xl rounded-sm border-2 border-gray-900 ${data.class} text-center`}
         />
       ))}
     </>

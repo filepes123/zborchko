@@ -22,11 +22,11 @@ export default function App() {
     fetchData();
   }, []);
 
-  useEffect(()=>{
-    if(currentIndex > 4){
-      setFinish()
+  useEffect(() => {
+    if (currentIndex > 4) {
+      setFinish();
     }
-  },[currentIndex])
+  }, [currentIndex]);
 
   const parseData = (data) => {
     const regValidation = /[!@#$%^&*()_+\-=[\]{};~':"\\|,.<>/?]/g;
@@ -43,24 +43,27 @@ export default function App() {
       Math.random() * parseInt(randomTweet.length)
     );
     const randomWord = randomTweet[randomWordIndex].toUpperCase();
-    console.log('ne kur gledaj tuka go stavam ova za da znam barem koj e zborot ',randomWord)
+    console.log(
+      "ne kur gledaj tuka go stavam ova za da znam barem koj e zborot ",
+      randomWord
+    );
     setData(randomWord);
   };
   const setUpdateIndex = () => {
     setCurrentIndex(currentIndex + 1);
-  }
+  };
   const setFinish = () => {
     setDone(true);
     swal({
-      title: `Sakash pak? posho zborot beshe ${data}`,
-      text: "Btw poteshko kje e ovoj put",
+      title: `Сакаш да се обидеш повторно? Зборот беше ${data}`,
+      text: "Овој пат ќе биде уште потешко!",
       icon:
-        "https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg",
+        "https://media.istockphoto.com/vectors/creative-thinking-vector-id1032869448?k=20&m=1032869448&s=612x612&w=0&h=SujDT-s9sKPNm1B7LkycKAJC97s89b4aolsVToGa3Q8=",
       buttons: true,
       dangerMode: false
     }).then((willDelete) => {
       if (willDelete) {
-        swal("Hajmo", {
+        swal("Одиме!", {
           icon: "success"
         });
       } else {
@@ -88,8 +91,10 @@ export default function App() {
     return final;
   };
   return (
-    <div className="bg-gray-800 min-h-screen text-white p-8 flex flex-col items-center">
-      <h1 className="text-4xl uppercase text-lg font-semibold">Zborchko</h1>
+    <div className="bg-gray-600 min-h-screen text-white p-8 flex flex-col items-center">
+      <h1 className="text-4xl uppercase text-lg font-semibold font-mono">
+        Зборчко
+      </h1>
       <div className="my-3">
         {done ? <Confetti width={width} height={height} /> : renderTiles()}
       </div>
