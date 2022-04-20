@@ -2,7 +2,7 @@ const fetch = require('node-fetch')
 
 const handler = async function () {
   try {
-    const response = await fetch('https://api.twitter.com/2/users/575572487/tweets', {
+    const response = await fetch('https://api.twitter.com/2/users/1648317175/tweets', {
       headers: { Accept: 'application/json', Authorization: `Bearer ${process.env.REACT_TWITTER_KEY}`
     },
     })
