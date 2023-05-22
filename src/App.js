@@ -30,11 +30,13 @@ export default function App() {
 
   const parseData = (data) => {
     const regValidation = /[!@#$%^&*()_+\-=[\]{};~':"\\|,.<>/?]/g;
+    const cyrilicValidation = /^[аАбБвВгГдДеЕёЁжЖзЗиИйЙкКлЛмМнНоОпПрРсСтТуУфФхХцЦчЧшШщЩъЪыЫьЬэЭюЮяЯ]+$/
     const randomTweetIndex = Math.floor(
       Math.random() * parseInt(data.data.length)
     );
     const randomTweet = data.data[randomTweetIndex].text
       .replace(regValidation, "")
+      .replace(!cyrilicValidation, "")
       .split(" ")
       .filter(
         (word) => word.length > 4 && word.length < 10 && word !== "VladaMK"

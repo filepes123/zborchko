@@ -71,8 +71,13 @@ const Tile = ({ word, setFinish, setUpdateIndex, disabled, row }) => {
           tmpObj.letter = parsedGuess[i];
           tmpObj.class = "bg-green-400";
         } else {
-          tmpObj.letter = parsedGuess[i];
-          tmpObj.class = "bg-red-400";
+          if(word.includes(parsedGuess[i])){
+            tmpObj.letter = parsedGuess[i];
+            tmpObj.class = "bg-orange-400";
+          }else{
+            tmpObj.letter = parsedGuess[i];
+            tmpObj.class = "bg-red-400";
+          }
         }
         finishedRow.push(tmpObj);
       }
