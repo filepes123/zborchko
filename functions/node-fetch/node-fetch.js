@@ -6,7 +6,9 @@ const handler = async function () {
       headers: { Accept: 'application/json', Authorization: `Bearer ${process.env.REACT_TWITTER_KEY}`
     },
     })
-    
+    if (response.status === 403) {
+      console.log(response);
+    }
     if (!response.ok) {
       // NOT res.status >= 200 && res.status < 300
       return { statusCode: response.status, body: response.statusText }
