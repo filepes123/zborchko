@@ -59,7 +59,7 @@ export default function App() {
     const randomWordIndex = Math.floor(
       Math.random() * parseInt(WORDS.length)
     );
-    const randomWord = randomTweet[randomWordIndex].toUpperCase();
+    const randomWord = WORDS[randomWordIndex].toUpperCase();
     console.log(
       "ne kur gledaj tuka go stavam ova za da znam barem koj e zborot ",
       randomWord
