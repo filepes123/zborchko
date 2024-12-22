@@ -18,6 +18,8 @@ export default function App() {
       const data = await axios.get('/.netlify/functions/node-fetch');
       if (data.data.data) {
         parseData(data.data.data);
+      }else{
+        parseStaticData()
       }
     }
     fetchData();
@@ -50,13 +52,18 @@ export default function App() {
       "ne kur gledaj tuka go stavam ova za da znam barem koj e zborot ",
       randomWord
     );
-    if(!randomWord){
-      const randomWordIndex = Math.floor(
-        Math.random() * parseInt(WORDS.length)
-      );
-      const randomWord = randomTweet[randomWordIndex].toUpperCase();
-      setData(randomWord);
-    }
+    setData(randomWord);
+  };
+
+  const parseStaticData = (data) => {
+    const randomWordIndex = Math.floor(
+      Math.random() * parseInt(WORDS.length)
+    );
+    const randomWord = randomTweet[randomWordIndex].toUpperCase();
+    console.log(
+      "ne kur gledaj tuka go stavam ova za da znam barem koj e zborot ",
+      randomWord
+    );
     setData(randomWord);
   };
   const setUpdateIndex = () => {
