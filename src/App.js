@@ -6,6 +6,7 @@ import useWindowSize from "react-use/lib/useWindowSize";
 import Confetti from "react-confetti";
 import swal from "sweetalert";
 import axios from "axios";
+import { WORDS } from "./constants/wordList";
 
 export default function App() {
   const [done, setDone] = useState(false);
@@ -49,6 +50,13 @@ export default function App() {
       "ne kur gledaj tuka go stavam ova za da znam barem koj e zborot ",
       randomWord
     );
+    if(!randomWord){
+      const randomWordIndex = Math.floor(
+        Math.random() * parseInt(WORDS.length)
+      );
+      const randomWord = randomTweet[randomWordIndex].toUpperCase();
+      setData(randomWord);
+    }
     setData(randomWord);
   };
   const setUpdateIndex = () => {
