@@ -13,17 +13,19 @@ export default function App() {
   const { width, height } = useWindowSize();
   const [data, setData] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
-  useEffect(() => {
-    async function fetchData() {
-      const data = await axios.get('/.netlify/functions/node-fetch');
-      if (data.data.data) {
-        parseData(data.data.data);
-      }else{
-        parseStaticData()
-      }
-    }
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const data = await axios.get('/.netlify/functions/node-fetch');
+  //     if (data.data.data) {
+  //       parseData(data.data.data);
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
+
+  useEffect(()=>{
+    parseStaticData()
+  },[])
 
   useEffect(() => {
     if (currentIndex > 4) {
